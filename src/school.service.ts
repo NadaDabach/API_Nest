@@ -31,24 +31,46 @@ export class SchoolService implements OnModuleInit{
                     return response.data;
                 }),
                 tap((api) => {
-                api.forEach((elem) => { 
+                //api = JSON.parse(api)
+                //api.forEach((elem) => {
+                //     this.school_array.push({ 
+                //         libelle : elem.fields.uo_lib,
+                //         sigle : elem.fields.nom_court, //nom court peut etre ? => (ou qualification_court (qualification en priorité))
+                //         type : elem.fields.type_d_etablissement,
+                //         secteur : elem.fields.secteur_d_etablissement,
+                //         vague : elem.fields.vague_contractuelle,
+                //         geolocalisation : elem.fields.coordonnees,
+                //         date : elem.fields.date_creation,
+                //         departement : elem.fields.dep_nom,
+                //         region : elem.fields.reg_nom,
+                //         adresse : elem.fields.adresse_uai,
+                //         code_postal : elem.fields.code_postal_uai,
+                //         numero_telephone : elem.fields.numero_telephone_uai, 
+                //         site_web : elem.fields.url,
+                //         compte_fb : elem.fields.compte_facebook,
+                //         compte_twitter : elem.fields.compte_twitter,
+                //         compte_insta : elem.fields.compte_instagram,
+                //         favorite: false,
+                //     });
+                // });
+                Object.keys(api).forEach((elem) => { 
                     this.school_array.push({ 
-                        libelle : elem.fields.uo_lib,
-                        sigle : elem.fields.nom_court, //nom court peut etre ? => (ou qualification_court (qualification en priorité))
-                        type : elem.fields.type_d_etablissement,
-                        secteur : elem.fields.secteur_d_etablissement,
-                        vague : elem.fields.vague_contractuelle,
-                        geolocalisation : elem.fields.coordonnees,
-                        date : elem.fields.date_creation,
-                        departement : elem.fields.dep_nom,
-                        region : elem.fields.reg_nom,
-                        adresse : elem.fields.adresse_uai,
-                        code_postal : elem.fields.code_postal_uai,
-                        numero_telephone : elem.fields.numero_telephone_uai, 
-                        site_web : elem.fields.url,
-                        compte_fb : elem.fields.compte_facebook,
-                        compte_twitter : elem.fields.compte_twitter,
-                        compte_insta : elem.fields.compte_instagram,
+                        libelle : api[elem].uo_lib,
+                        sigle : api[elem].nom_court, //nom court peut etre ? => (ou qualification_court (qualification en priorité))
+                        type : api[elem].type_d_etablissement,
+                        secteur : api[elem].secteur_d_etablissement,
+                        vague : api[elem].vague_contractuelle,
+                        geolocalisation : api[elem].coordonnees,
+                        date : api[elem].date_creation,
+                        departement : api[elem].dep_nom,
+                        region : api[elem].reg_nom,
+                        adresse : api[elem].adresse_uai,
+                        code_postal : api[elem].code_postal_uai,
+                        numero_telephone : api[elem].numero_telephone_uai, 
+                        site_web : api[elem].url,
+                        compte_fb : api[elem].compte_facebook,
+                        compte_twitter : api[elem].compte_twitter,
+                        compte_insta : api[elem].compte_instagram,
                         favorite: false,
                     });
                 });

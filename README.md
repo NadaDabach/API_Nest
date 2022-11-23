@@ -42,5 +42,5 @@ Login to Clever Cloud and create a Node.JS application with option detailed in c
  - Open Postman, create a new environment with `url` equal to the Clever Cloud one, try to do some requests! 
 
 
-attention faut faire le truc dans le cours
-push clever master:main ou un truc comme ça
+
+push clever main:master

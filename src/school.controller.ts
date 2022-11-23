@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/commo
 import { SchoolService } from './school.service';
 import { School } from './School';
 
-@Controller('/Schools') //faut qu'il ecoute sur /Schools p25 du power point n°4
+@Controller('/schools') //faut qu'il ecoute sur /schools p25 du power point n°4
 export class SchoolController {
   constructor(private readonly schoolService: SchoolService) {
     
