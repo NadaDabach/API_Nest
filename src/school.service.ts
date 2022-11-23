@@ -31,6 +31,7 @@ export class SchoolService implements OnModuleInit{
                     return response.data;
                 }),
                 tap((api) => {
+                api = JSON.parse(api)
                 api.forEach((elem) => { 
                     this.school_array.push({ 
                         libelle : elem.fields.uo_lib,
