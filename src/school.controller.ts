@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
-import { SchoolService } from './School.service';
+import { SchoolService } from './school.service';
 import { School } from './School';
 
 @Controller('/Schools') //faut qu'il ecoute sur /Schools p25 du power point n°4
