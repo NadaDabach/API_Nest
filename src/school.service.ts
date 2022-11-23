@@ -55,22 +55,22 @@ export class SchoolService implements OnModuleInit{
                 // });
                 Object.keys(api).forEach((elem) => { 
                     this.school_array.push({ 
-                        libelle : api[elem],
-                        sigle : api[elem], //nom court peut etre ? => (ou qualification_court (qualification en priorité))
-                        type : api[elem],
-                        secteur : api[elem],
-                        vague : api[elem],
-                        geolocalisation : api[elem],
-                        date : api[elem],
-                        departement : api[elem],
-                        region : api[elem],
-                        adresse : api[elem],
-                        code_postal : api[elem],
-                        numero_telephone : api[elem], 
-                        site_web : api[elem],
-                        compte_fb : api[elem],
-                        compte_twitter : api[elem],
-                        compte_insta : api[elem],
+                        libelle : api[elem].uo_lib,
+                        sigle : api[elem].nom_court, //nom court peut etre ? => (ou qualification_court (qualification en priorité))
+                        type : api[elem].type_d_etablissement,
+                        secteur : api[elem].secteur_d_etablissement,
+                        vague : api[elem].vague_contractuelle,
+                        geolocalisation : api[elem].coordonnees,
+                        date : api[elem].date_creation,
+                        departement : api[elem].dep_nom,
+                        region : api[elem].reg_nom,
+                        adresse : api[elem].adresse_uai,
+                        code_postal : api[elem].code_postal_uai,
+                        numero_telephone : api[elem].numero_telephone_uai, 
+                        site_web : api[elem].url,
+                        compte_fb : api[elem].compte_facebook,
+                        compte_twitter : api[elem].compte_twitter,
+                        compte_insta : api[elem].compte_instagram,
                         favorite: false,
                     });
                 });
