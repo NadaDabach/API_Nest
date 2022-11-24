@@ -16,7 +16,7 @@ export class SchoolService implements OnModuleInit{
 
     //step extra on va sur internet
     async onModuleInit(): Promise<void>{
-        await Promise.all([this.loadSchoolFromFile()]); //, this.loadSchoolFromAPI()
+        await Promise.all([this.loadSchoolFromFile(), this.loadSchoolFromAPI()]);
     }
 
     private async loadSchoolFromAPI(): Promise<void>{
@@ -56,9 +56,28 @@ export class SchoolService implements OnModuleInit{
         let data_school : JSON
         try{
             const data = await readFile("./src/dataset.json");
-            this.school_array = JSON.parse(data.toString()); //data_school
-            //this.school_array = data_school["fields"] //this causes school_array to become undefined
-
+            data_school = JSON.parse(data.toString());
+            for (let i = 0; i < Object.keys(data_school).length; i++) {
+                this.school_array.push({ 
+                    libelle : data_school[i].fields.uo_lib,
+                    sigle : data_school[i].fields.nom_court,
+                    type : data_school[i].fields.type_d_etablissement,
+                    secteur : data_school[i].fields.secteur_d_etablissement,
+                    vague : data_school[i].fields.vague_contractuelle,
+                    geolocalisation : data_school[i].fields.coordonnees,
+                    date : data_school[i].fields.date_creation,
+                    departement : data_school[i].fields.dep_nom,
+                    region : data_school[i].fields.reg_nom,
+                    adresse : data_school[i].fields.adresse_uai,
+                    code_postal : data_school[i].fields.code_postal_uai,
+                    numero_telephone : data_school[i].fields.numero_telephone_uai, 
+                    site_web : data_school[i].fields.url,
+                    compte_fb : data_school[i].fields.compte_facebook,
+                    compte_twitter : data_school[i].fields.compte_twitter,
+                    compte_insta : data_school[i].fields.compte_instagram,
+                    favorite: false,
+                });
+            }
         }
         catch(error){
             console.log("Err: $(error)");
