@@ -1,9 +1,12 @@
 import { IsArray, IsNumber, IsString } from "class-validator";
 
 export class APISchools{
-   datasetid;
-   recordid;
+   @IsString()
+   datasetid : string;
+   @IsString()
+   recordid : string;
    fields;
    geometry;
-   record_timestamp;
+   @IsString()
+   record_timestamp : string;
 }
