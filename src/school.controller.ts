@@ -13,12 +13,7 @@ export class SchoolController {
     this.schoolService.addSchool(school);
     return school;
   }
-
-  // @Get()
-  // methodeGet(): School[] {
-  //     return this.schoolService.getAllSchools();
-  // }
-
+  
   @Get()
   methodeGet(@Query("departement") departement : string | undefined): School[] {
     if (departement === undefined){

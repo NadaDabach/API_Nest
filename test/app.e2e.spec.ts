@@ -4,9 +4,6 @@ import { INestApplication } from '@nestjs/common';
 import supertest from 'supertest';
 import { SchoolModule } from '../src/school.module';
 
-//mettre a jour les tests, rajouter des fonctions de get, post etc
-//regler le probleme de la compexité du json, les data sont dans "fields" contrairement aux books
-//faut prendre ça en compte
 describe('Schools API', () => {
   let app: INestApplication;
   let httpRequester: supertest.SuperTest<supertest.Test>;
@@ -335,22 +332,3 @@ describe('Schools API', () => {
 
 
 });
-
-
-// libelle : elem.fields.uo_lib,
-// sigle : elem.fields.nom_court, //nom court peut etre ? => (ou qualification_court (qualification en priorité))
-// type : elem.fields.type_d_etablissement,
-// secteur : elem.fields.secteur_d_etablissement,
-// vague : elem.fields.vague_contractuelle,
-// geolocalisation : elem.fields.coordonnees,
-// date : elem.fields.date_creation,
-// departement : elem.fields.dep_nom,
-// region : elem.fields.reg_nom,
-// adresse : elem.fields.adresse_uai,
-// code_postal : elem.fields.code_postal_uai,
-// numero_telephone : elem.fields.numero_telephone_uai, 
-// site_web : elem.fields.url,
-// compte_fb : elem.fields.compte_facebook,
-// compte_twitter : elem.fields.compte_twitter,
-// compte_insta : elem.fields.compte_instagram,
-// favorite: false,
