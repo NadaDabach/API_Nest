@@ -1,9 +1,9 @@
-import { IsArray, IsNumber, IsString } from "class-validator";
+import { IsNumber } from "class-validator";
 
 export class APISchools{
-   datasetid;
-   recordid;
-   fields;
-   geometry;
-   record_timestamp;
+   @IsNumber()
+   nhits: number;
+   paremeters;
+   records;
+   facet_groups;
 }
