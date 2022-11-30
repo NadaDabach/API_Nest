@@ -1,10 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { School } from './School';
+import { PaginatedType, PaginationService } from './pagination.service';
 
 @Controller('/schools') //faut qu'il ecoute sur /schools p25 du power point n°4
 export class SchoolController {
-  constructor(private readonly schoolService: SchoolService) {
+  constructor(private readonly schoolService: SchoolService,
+              private readonly paginationService: PaginationService,) {
     
 
   }
@@ -15,9 +17,16 @@ export class SchoolController {
   }
   
   @Get()
-  methodeGet(@Query("departement") departement : string | undefined): School[] {
+  methodeGetSchool(@Query("departement") departement : string | undefined,
+             @Query("page") page : string,
+             @Query("size") size : string
+             ): School[] | PaginatedType<School> {
     if (departement === undefined){
-      return this.schoolService.getAllSchools();
+      return this.paginationService.paginatedData(
+        this.schoolService.getAllSchools(),
+        page,
+        size,
+      );
     }
     return this.schoolService.getSchoolsOfDepartement(departement);
   }
