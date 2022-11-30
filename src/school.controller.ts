@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, HttpCode } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { School } from './School';
 import { PaginatedType, PaginationService } from './pagination.service';
@@ -48,6 +48,20 @@ export class SchoolController {
     this.schoolService.inverseFavoriteLogic(name);
     let school = this.schoolService.getSchool(name)
     return school;
+  }
+
+  @Post('search')
+  @HttpCode(200)
+  public methodeSearchByLibelleOrDepartement(
+    @Body() query: { recolteTerm: string },
+    @Query('page') page: string,
+    @Query('size') size: string,
+  ): PaginatedType<School> {
+    return this.paginationService.paginatedData(
+      this.schoolService.searchByLibelleOrDepartement(query.recolteTerm),
+      page,
+      size,
+    );
   }
 
 }
