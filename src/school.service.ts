@@ -117,5 +117,16 @@ export class SchoolService implements OnModuleInit{
             this.school_array.push(copySchool);
     }
 
+    searchByLibelleOrDepartement(searchTerm: string): School[] {
+        const termRecolte = searchTerm.toLowerCase().trim();
+    
+        return this.school_array.filter((school) => {
+          return (
+            school.libelle.toLowerCase().includes(termRecolte) ||
+            school.departement.toLowerCase().includes(termRecolte)
+          );
+        });
+      }
+
     
 }
