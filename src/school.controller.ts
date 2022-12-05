@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { School } from './School';
 
@@ -39,11 +39,11 @@ export class SchoolController {
     return schoolToDelete;
   }
 
-  @Post('/:nameOfSchool')
-  methodeInverseFavoriteLogic(@Param('nameOfSchool') name: string): School | undefined{
+  @Put('/:nameOfSchool')
+  methodeInverseFavoriteLogic(@Param('nameOfSchool') name: string, @Body() schoolUpdated : School){
     this.schoolService.inverseFavoriteLogic(name);
-    let school = this.schoolService.getSchool(name)
-    return school;
+    schoolUpdated = this.schoolService.getSchool(name)
+    return schoolUpdated;
   }
 
 }
