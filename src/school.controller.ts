@@ -44,10 +44,10 @@ export class SchoolController {
   }
 
   @Put('/:nameOfSchool')
-  methodeInverseFavoriteLogic(@Param('nameOfSchool') name: string){
+  methodeInverseFavoriteLogic(@Param('nameOfSchool') name: string, @Body() schoolUpdated : School){
     this.schoolService.inverseFavoriteLogic(name);
-    let school = this.schoolService.getSchool(name)
-    return school;
+    schoolUpdated = this.schoolService.getSchool(name)
+    return schoolUpdated;
   }
 
   @Post('search')
