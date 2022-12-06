@@ -1,12 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, HttpCode } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { School } from './School';
-import { PaginatedType, PaginationService } from './pagination.service';
 
-@Controller('/schools') //faut qu'il ecoute sur /schools p25 du power point n°4
+@Controller('/schools')
 export class SchoolController {
-  constructor(private readonly schoolService: SchoolService,
-              private readonly paginationService: PaginationService,) {
+  constructor(private readonly schoolService: SchoolService) {
     
 
   }
@@ -15,18 +13,11 @@ export class SchoolController {
     this.schoolService.addSchool(school);
     return school;
   }
-  
+
   @Get()
-  methodeGetSchool(@Query("departement") departement : string | undefined,
-             @Query("page") page : string,
-             @Query("size") size : string
-             ): School[] | PaginatedType<School> {
+  methodeGet(@Query("departement") departement : string | undefined): School[] {
     if (departement === undefined){
-      return this.paginationService.paginatedData(
-        this.schoolService.getAllSchools(),
-        page,
-        size,
-      );
+      return this.schoolService.getAllSchools();
     }
     return this.schoolService.getSchoolsOfDepartement(departement);
   }
@@ -44,24 +35,15 @@ export class SchoolController {
   }
 
   @Put('/:nameOfSchool')
-  methodeInverseFavoriteLogic(@Param('nameOfSchool') name: string){
+  methodeInverseFavoriteLogic(@Param('nameOfSchool') name: string, @Body() schoolUpdated : School){
     this.schoolService.inverseFavoriteLogic(name);
-    let school = this.schoolService.getSchool(name)
-    return school;
   }
 
   @Post('search')
-  @HttpCode(200)
   public methodeSearchByLibelleOrDepartement(
-    @Body() query: { recolteTerm: string },
-    @Query('page') page: string,
-    @Query('size') size: string,
-  ): PaginatedType<School> {
-    return this.paginationService.paginatedData(
-      this.schoolService.searchByLibelleOrDepartement(query.recolteTerm),
-      page,
-      size,
-    );
+    @Body() query: { recolteTerm: string }
+  ) {
+    return this.schoolService.searchByLibelleOrDepartement(query.recolteTerm)
   }
 
 }
