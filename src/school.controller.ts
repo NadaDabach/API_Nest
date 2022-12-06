@@ -41,7 +41,7 @@ export class SchoolController {
 
   @Put('/:nameOfSchool')
   methodeInverseFavoriteLogic(@Param('nameOfSchool') name: string, @Body() schoolUpdated : School){
-    this.schoolService.inverseFavoriteLogic(name, schoolUpdated);
+    this.schoolService.inverseFavoriteLogicTest(name);
   }
 
 }

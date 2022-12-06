@@ -119,6 +119,13 @@ export class SchoolService implements OnModuleInit{
         this.school_array.push(copySchool)
         
     }
+    inverseFavoriteLogicTest(id : string) : void{
+        let copySchool : School = this.school_array.filter(school => school.libelle === id)[0]
+        copySchool.favorite = !copySchool.favorite
+        this.school_array = this.school_array.filter(school => school.libelle != id)
+        this.school_array.push(copySchool)
+        
+    }
 
     
 }
