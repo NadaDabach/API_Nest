@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { SchoolService } from './school.service';
 import { School } from './School';
 
-@Controller('/schools') //faut qu'il ecoute sur /schools p25 du power point n°4
+@Controller('/schools')
 export class SchoolController {
   constructor(private readonly schoolService: SchoolService) {
     
@@ -13,11 +13,6 @@ export class SchoolController {
     this.schoolService.addSchool(school);
     return school;
   }
-
-  // @Get()
-  // methodeGet(): School[] {
-  //     return this.schoolService.getAllSchools();
-  // }
 
   @Get()
   methodeGet(@Query("departement") departement : string | undefined): School[] {
@@ -41,7 +36,18 @@ export class SchoolController {
 
   @Put('/:nameOfSchool')
   methodeInverseFavoriteLogic(@Param('nameOfSchool') name: string, @Body() schoolUpdated : School){
-    this.schoolService.inverseFavoriteLogicTest(name);
+    this.schoolService.inverseFavoriteLogic(name);
   }
+
+  @Post('search')
+  public methodeSearchByLibelleOrDepartement(
+    @Body() query: { recolteTerm: string }
+  ) {
+    return this.schoolService.searchByLibelleOrDepartement(query.recolteTerm)
+  //   if (this.schoolService.getSchool(query.recolteTerm) != undefined ){
+  //     return this.schoolService.getSchool(query.recolteTerm)
+  //   }
+  //   return this.schoolService.getSchoolsOfDepartement(query.recolteTerm)
+  // }
 
 }

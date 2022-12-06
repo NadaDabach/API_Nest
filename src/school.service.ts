@@ -112,20 +112,25 @@ export class SchoolService implements OnModuleInit{
             this.school_array = this.school_array.filter(school => school.libelle != name);
         }
     }
-    inverseFavoriteLogic(id : string, s : School) : void{
-        let copySchool : School = this.school_array.filter(school => school.libelle === id)[0]
-        copySchool.favorite = s.favorite
-        this.school_array = this.school_array.filter(school => school.libelle != id)
-        this.school_array.push(copySchool)
-        
-    }
-    inverseFavoriteLogicTest(id : string) : void{
+
+    inverseFavoriteLogic(id : string) : void{
         let copySchool : School = this.school_array.filter(school => school.libelle === id)[0]
         copySchool.favorite = !copySchool.favorite
         this.school_array = this.school_array.filter(school => school.libelle != id)
         this.school_array.push(copySchool)
         
     }
+
+    searchByLibelleOrDepartement(searchTerm: string): School[] {
+        const termRecolte = searchTerm.toLowerCase().trim();
+    
+        return this.school_array.filter((school) => {
+          return (
+            school.libelle.toLowerCase().includes(termRecolte) ||
+            school.departement.toLowerCase().includes(termRecolte)
+          );
+        });
+      }
 
     
 }
