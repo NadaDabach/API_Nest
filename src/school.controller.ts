@@ -44,10 +44,6 @@ export class SchoolController {
     @Body() query: { recolteTerm: string }
   ) {
     return this.schoolService.searchByLibelleOrDepartement(query.recolteTerm)
-  //   if (this.schoolService.getSchool(query.recolteTerm) != undefined ){
-  //     return this.schoolService.getSchool(query.recolteTerm)
-  //   }
-  //   return this.schoolService.getSchoolsOfDepartement(query.recolteTerm)
-  // }
+  }
 
 }
